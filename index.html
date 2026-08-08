@@ -1,437 +1,289 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  
-  <meta name="title" content="Towards In-Context Tone Style Transfer with A Large-Scale Triplet Dataset">
-  <meta name="description" content="ICTone introduces an in-context diffusion framework for tone style transfer together with TST100K, the first large-scale content-reference-stylized triplet dataset.">
-  <meta name="keywords" content="tone style transfer, photo retouching, diffusion models, in-context generation, image editing, TST100K, TST2K">
-  <meta name="author" content="Yuhai Deng, Huimin She, Wei Shen, Meng Li, Ruoxi Wu, Lunxi Yuan, Xiang Li">
-  <meta name="robots" content="index, follow">
-  <meta name="language" content="English">
-  
-  <meta property="og:type" content="article">
-  <meta property="og:site_name" content="ICTone Project Page">
-  <meta property="og:title" content="Towards In-Context Tone Style Transfer with A Large-Scale Triplet Dataset">
-  <meta property="og:description" content="A project page for ICTone, TST100K, and TST2K for semantically aware tone style transfer.">
-  <meta property="og:url" content="https://github.com/dengyuhai/ICTone_Project">
-  <meta property="og:image" content="https://raw.githubusercontent.com/dengyuhai/ICTone_Project/main/static/images/teaser_figure1.png">
-  <meta property="og:image:alt" content="ICTone teaser figure">
-  <meta property="article:published_time" content="2026-03-27T00:00:00.000Z">
-  <meta property="article:author" content="Yuhai Deng">
-  <meta property="article:section" content="Research">
-  <meta property="article:tag" content="Tone Style Transfer">
-  <meta property="article:tag" content="Image Editing">
+  <meta name="theme-color" content="#f7f6f1">
+  <meta name="description" content="VAExpress generates expressive talking-face videos from one portrait and one audio clip, with audio-aligned emotion and continuous Valence-Arousal control.">
+  <meta name="keywords" content="VAExpress, talking face generation, expressive avatar, portrait animation, emotion control, valence arousal">
 
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Towards In-Context Tone Style Transfer with A Large-Scale Triplet Dataset">
-  <meta name="twitter:description" content="ICTone performs semantic-aware tone transfer with an in-context diffusion framework and a new TST100K triplet dataset.">
-  <meta name="twitter:image" content="https://raw.githubusercontent.com/dengyuhai/ICTone_Project/main/static/images/teaser_figure1.png">
-  <meta name="twitter:image:alt" content="ICTone teaser figure">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="VAExpress — Expressive talking-face generation">
+  <meta property="og:description" content="One portrait and one voice, turned into an expressive talking-face video.">
+  <meta property="og:image" content="static/images/video-posters/emotion_audio_drive1.jpg">
 
-  <meta name="citation_title" content="Towards In-Context Tone Style Transfer with A Large-Scale Triplet Dataset">
-  <meta name="citation_author" content="Deng, Yuhai">
-  <meta name="citation_author" content="She, Huimin">
-  <meta name="citation_author" content="Shen, Wei">
-  <meta name="citation_author" content="Li, Meng">
-  <meta name="citation_author" content="Wu, Ruoxi">
-  <meta name="citation_author" content="Yuan, Lunxi">
-  <meta name="citation_author" content="Li, Xiang">
-  <meta name="citation_publication_date" content="2026">
-  <meta name="citation_pdf_url" content="https://raw.githubusercontent.com/dengyuhai/ICTone_Project/main/static/pdfs/ICTone_paper.pdf">
-  
-  <!-- Additional SEO -->
-  <meta name="theme-color" content="#2563eb">
-  <meta name="msapplication-TileColor" content="#2563eb">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  
-  <!-- Preconnect for performance -->
+  <title>VAExpress — Expressive talking-face generation</title>
+  <link rel="icon" href="static/images/vaexpress-mark.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preconnect" href="https://cdn.jsdelivr.net">
-  <title>ICTone | In-Context Tone Style Transfer</title>
-  
-  <!-- Favicon and App Icons -->
-  <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
-  <link rel="apple-touch-icon" href="static/images/favicon.ico">
-  
-  <!-- Critical CSS - Load synchronously -->
-  <link rel="stylesheet" href="static/css/bulma.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-carousel@4.0.24/dist/css/bulma-carousel.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="static/css/index.css">
-  
-  <link rel="preload" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  
-  <!-- Fallback for browsers that don't support preload -->
-  <noscript>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-  </noscript>
-  
-  <!-- Fonts - Optimized loading -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  
-  <!-- Defer non-critical JavaScript -->
-  <script defer src="static/js/fontawesome.all.min.js"></script>
-  <script defer src="https://cdn.jsdelivr.net/npm/bulma-carousel@4.0.24/dist/js/bulma-carousel.min.js"></script>
   <script defer src="static/js/index.js"></script>
-  
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "ScholarlyArticle",
-    "headline": "Towards In-Context Tone Style Transfer with A Large-Scale Triplet Dataset",
-    "description": "ICTone is a diffusion-based framework for semantically aware tone style transfer, accompanied by the TST100K triplet dataset and the TST2K benchmark.",
-    "author": [
-      {"@type": "Person", "name": "Yuhai Deng"},
-      {"@type": "Person", "name": "Huimin She"},
-      {"@type": "Person", "name": "Wei Shen"},
-      {"@type": "Person", "name": "Meng Li"},
-      {"@type": "Person", "name": "Ruoxi Wu"},
-      {"@type": "Person", "name": "Lunxi Yuan"},
-      {"@type": "Person", "name": "Xiang Li"}
-    ],
-    "datePublished": "2026-03-27",
-    "publisher": {
-      "@type": "Organization",
-      "name": "Under Review"
-    },
-    "url": "https://github.com/dengyuhai/ICTone_Project",
-    "image": "https://raw.githubusercontent.com/dengyuhai/ICTone_Project/main/static/images/teaser_figure1.png",
-    "keywords": ["tone style transfer", "photo retouching", "diffusion models", "in-context generation", "TST100K"],
-    "abstract": "We introduce TST100K, a large-scale dataset of 100,000 content-reference-stylized triplets, and ICTone, an in-context diffusion framework for semantic-aware tone style transfer with reward feedback learning.",
-    "isAccessibleForFree": true,
-    "mainEntity": {
-      "@type": "WebPage",
-      "@id": "https://github.com/dengyuhai/ICTone_Project"
-    }
-  }
-  </script>
 </head>
+
 <body>
+  <a class="skip-link" href="#main-content" data-i18n="skipLink">Skip to content</a>
 
-
-  <!-- Scroll to Top Button -->
-  <button class="scroll-to-top" onclick="scrollToTop()" title="Scroll to top" aria-label="Scroll to top">
-    <i class="fas fa-chevron-up"></i>
-  </button>
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="VAExpress home">
+      <img src="static/images/vaexpress-mark.svg" alt="" width="34" height="34">
+      <span>VAExpress</span>
+    </a>
+    <nav aria-label="Primary navigation" data-i18n-aria-label="nav.label">
+      <a href="#results" data-i18n="nav.results">Results</a>
+      <a href="#method" data-i18n="nav.method">How it works</a>
+      <a class="report-link" href="VAExpress.pdf"><span data-i18n="nav.report">Technical report</span> <span aria-hidden="true">↗</span></a>
+      <span class="language-switch" role="group" aria-label="Language" data-i18n-aria-label="language.label">
+        <a href="?lang=en" data-language="en" lang="en">EN</a>
+        <a href="?lang=zh" data-language="zh" lang="zh-CN">中文</a>
+      </span>
+    </nav>
+  </header>
 
   <main id="main-content">
-  <section class="hero">
-    <div class="hero-body">
-      <div class="container is-max-desktop">
-        <div class="columns is-centered">
-          <div class="column has-text-centered">
-            <h1 class="title is-1 publication-title publication-title-with-logo">
+    <section class="hero" id="top">
+      <div class="hero-copy">
+        <p class="eyebrow" data-i18n="hero.kicker">Expressive talking-face generation</p>
+        <h1 data-i18n="hero.title">Make the face match the feeling.</h1>
+        <p class="lede" data-i18n-html="hero.lede">VAExpress turns <strong>one portrait + one audio clip</strong> into a natural talking-face video. It goes beyond lip sync by generating facial expressions that follow the emotion of the voice.</p>
+        <div class="hero-actions">
+          <a class="button primary" href="#results" data-i18n="hero.resultsButton">See the results</a>
+          <a class="button secondary" href="VAExpress.pdf" data-i18n="hero.reportButton">Read the report ↗</a>
+        </div>
+        <ul class="capability-list" aria-label="Main capabilities" data-i18n-aria-label="capabilities.label">
+          <li data-i18n="capabilities.audio">Emotion from audio</li>
+          <li data-i18n="capabilities.control">Continuous emotion control</li>
+          <li data-i18n="capabilities.identity">Identity-aware generation</li>
+        </ul>
+      </div>
+
+      <figure class="hero-media">
+        <video autoplay muted loop playsinline controls preload="metadata" poster="static/images/video-posters/emotion_audio_drive1.jpg" aria-label="Audio-driven emotional talking-face results" data-i18n-aria-label="hero.videoLabel">
+          <source src="compare_video/emotion_audio_drive1.mp4" type="video/mp4">
+          Your browser does not support HTML5 video.
+        </video>
+        <figcaption data-i18n="hero.caption">Audio-driven results across different emotions. Turn on sound to view the full example.</figcaption>
+      </figure>
+    </section>
+
+    <section class="summary" aria-label="Project summary">
+      <div>
+        <span data-i18n="summary.goalLabel">Goal</span>
+        <p data-i18n="summary.goal">Generate a talking face that is not only synchronized, but also emotionally expressive.</p>
+      </div>
+      <div>
+        <span data-i18n="summary.methodLabel">Method</span>
+        <p data-i18n="summary.method">Continuous Valence-Arousal guidance with spatial-temporal decoupled training.</p>
+      </div>
+      <div>
+        <span data-i18n="summary.resultLabel">Result</span>
+        <p data-i18n="summary.result">Readable expressions, controllable intensity, and smooth emotion transitions.</p>
+      </div>
+    </section>
+
+    <section class="section results" id="results">
+      <header class="section-header">
+        <p class="eyebrow" data-i18n="results.kicker">Generated results</p>
+        <h2 data-i18n="results.title">Judge it in motion.</h2>
+        <p data-i18n="results.intro">Three independent windows show method comparison, audio-driven emotion, and continuous emotion control.</p>
+      </header>
+
+      <div class="demo-grid">
+        <article class="demo-card">
+          <div class="demo-videos">
+            <figure class="demo-video">
+              <video controls playsinline preload="metadata" poster="static/images/video-posters/compare1.jpg" aria-label="VAExpress method comparison example one" data-i18n-aria-label="demo.compare.videoLabel">
+                <source src="compare_video/compare1.mp4" type="video/mp4">
+                Your browser does not support HTML5 video.
+              </video>
+              <figcaption data-i18n="demo.sample1">Example 01</figcaption>
+            </figure>
+            <figure class="demo-video">
+              <video controls playsinline preload="metadata" poster="static/images/video-posters/compare2.jpg" aria-label="VAExpress method comparison example two" data-i18n-aria-label="demo.compare.videoLabel2">
+                <source src="compare_video/compare2.mp4" type="video/mp4">
+                Your browser does not support HTML5 video.
+              </video>
+              <figcaption data-i18n="demo.sample2">Example 02</figcaption>
+            </figure>
+          </div>
+          <div class="demo-info">
+            <span data-i18n="demo.compare.label">Method comparison</span>
+            <h3 data-i18n="demo.compare.title">More expressive than lip-sync-first methods</h3>
+            <p data-i18n="demo.compare.description">On the same portrait and audio, VAExpress produces clearer motion in the eyes, brows, cheeks, and overall facial expression.</p>
+          </div>
+        </article>
+
+        <article class="demo-card">
+          <div class="demo-videos">
+            <figure class="demo-video">
+              <video controls playsinline preload="metadata" poster="static/images/video-posters/emotion_audio_drive1.jpg" aria-label="VAExpress audio-driven emotion example one" data-i18n-aria-label="demo.audio.videoLabel">
+                <source src="compare_video/emotion_audio_drive1.mp4" type="video/mp4">
+                Your browser does not support HTML5 video.
+              </video>
+              <figcaption data-i18n="demo.sample1">Example 01</figcaption>
+            </figure>
+            <figure class="demo-video">
+              <video controls playsinline preload="metadata" poster="static/images/video-posters/emotion_audio_drive2.jpg" aria-label="VAExpress audio-driven emotion example two" data-i18n-aria-label="demo.audio.videoLabel2">
+                <source src="compare_video/emotion_audio_drive2.mp4" type="video/mp4">
+                Your browser does not support HTML5 video.
+              </video>
+              <figcaption data-i18n="demo.sample2">Example 02</figcaption>
+            </figure>
+          </div>
+          <div class="demo-info">
+            <span data-i18n="demo.audio.label">Audio-driven emotion</span>
+            <h3 data-i18n="demo.audio.title">The voice can direct the expression</h3>
+            <p data-i18n="demo.audio.description">When no manual control is supplied, emotion cues are estimated from speech and used to guide the facial performance.</p>
+          </div>
+        </article>
+
+        <article class="demo-card">
+          <div class="demo-videos is-single">
+            <figure class="demo-video">
+              <video controls playsinline preload="metadata" poster="static/images/video-posters/emotion_control.jpg" aria-label="VAExpress continuous emotion control result" data-i18n-aria-label="demo.control.videoLabel">
+                <source src="compare_video/emotion_control.mp4" type="video/mp4">
+                Your browser does not support HTML5 video.
+              </video>
+              <figcaption data-i18n="demo.control.label">Emotion control</figcaption>
+            </figure>
+          </div>
+          <div class="demo-info">
+            <span data-i18n="demo.control.label">Continuous emotion control</span>
+            <h3 data-i18n="demo.control.title">Adjust intensity and transition smoothly</h3>
+            <p data-i18n="demo.control.description">A continuous emotion sequence can raise expression intensity gradually or move between affective states without abrupt category changes.</p>
+          </div>
+        </article>
+      </div>
+
+      <div class="result-points">
+        <div><strong data-i18n="points.audioTitle">Audio-aligned</strong><p data-i18n="points.audioText">Expressions follow the affective state of speech.</p></div>
+        <div><strong data-i18n="points.controlTitle">Fine-grained</strong><p data-i18n="points.controlText">Intensity can change continuously over time.</p></div>
+        <div><strong data-i18n="points.timeTitle">Temporally coherent</strong><p data-i18n="points.timeText">Transitions stay smooth without flattening expression.</p></div>
+      </div>
+    </section>
+
+    <section class="section method" id="method">
+      <header class="section-header compact">
+        <p class="eyebrow" data-i18n="method.kicker">How it works</p>
+        <h2 data-i18n="method.title">Three inputs, one expressive video.</h2>
+      </header>
+
+      <figure class="paper-figure pipeline-figure">
+        <a class="figure-image-link" href="static/images/report/vaexpress-pipeline.png" target="_blank" rel="noopener" aria-label="Open the full-size VAExpress pipeline" data-i18n-aria-label="figure.pipelineOpen">
+          <img
+            src="static/images/report/vaexpress-pipeline.png"
+            alt="VAExpress model pipeline and two-stage training strategy"
+            data-i18n-alt="figure.pipelineAlt"
+            width="1648"
+            height="748"
+            loading="lazy"
+          >
+          <span aria-hidden="true">↗</span>
+        </a>
+        <figcaption>
+          <span data-i18n="figure.pipelineKicker">Technical view</span>
+          <div>
+            <h3 data-i18n="figure.pipelineTitle">Overall pipeline and two-stage training</h3>
+            <p data-i18n="figure.pipelineText">Reference identity, speech, and continuous VA emotion signals enter separate conditioning branches before being combined by the diffusion generator. The right side shows the image-first, video-second training strategy.</p>
+          </div>
+        </figcaption>
+      </figure>
+
+      <div class="method-notes">
+        <article>
+          <p class="eyebrow" data-i18n="guidance.kicker">Continuous guidance</p>
+          <h3 data-i18n="guidance.title">Valence controls feeling. Arousal controls energy.</h3>
+          <p data-i18n="guidance.text">Instead of choosing only a fixed label such as “happy” or “sad,” VAExpress uses a continuous two-dimensional emotion signal. This makes subtle intensity changes and smooth transitions possible.</p>
+          <a class="figure-image-link va-visual" href="static/images/report/vis_va2.png" target="_blank" rel="noopener" aria-label="Open the full-size Valence-Arousal visualization" data-i18n-aria-label="guidance.visualOpen">
+            <picture>
+              <source srcset="static/images/report/vis_va2.webp" type="image/webp">
               <img
-                src="static/images/ICTone_logo.png"
-                alt="ICTone project logo"
-                class="project-logo project-logo-inline"
-                loading="eager"
+                src="static/images/report/vis_va2.png"
+                alt="Generated facial expressions distributed across the Valence-Arousal emotion space"
+                data-i18n-alt="guidance.visualAlt"
+                width="6923"
+                height="4196"
+                loading="lazy"
               >
-              <span>Towards In-Context Tone Style Transfer with A Large-Scale Triplet Dataset</span>
-            </h1>
-            <div class="is-size-5 publication-authors">
-              <span class="author-block">Yuhai Deng,</span>
-              <span class="author-block">Huimin She,</span>
-              <span class="author-block">Wei Shen,</span>
-              <span class="author-block">Meng Li,</span>
-              <span class="author-block">Ruoxi Wu,</span>
-              <span class="author-block">Lunxi Yuan,</span>
-              <span class="author-block">Xiang Li</span>
-            </div>
+            </picture>
+            <span aria-hidden="true">↗</span>
+          </a>
+        </article>
 
-            <div class="is-size-5 publication-authors">
-              <span class="author-block">School of Computer Science, Nankai University</span>
-              <span class="author-block">and</span>
-              <span class="author-block">OPPO AI Center, OPPO Inc.</span>
-            </div>
+        <article>
+          <p class="eyebrow" data-i18n="training.kicker">Decoupled training</p>
+          <h3 data-i18n="training.title">Learn expression first, then learn smooth motion.</h3>
+          <p data-i18n="training.text">Training spatial and temporal modules together can over-smooth facial movement. VAExpress first learns accurate emotion-to-expression mappings on images, then adds temporal training for coherent video.</p>
+          <ol class="training-steps">
+            <li><span data-i18n="training.stage1">Stage 1</span><strong data-i18n="training.stage1Text">Static expression learning</strong></li>
+            <li><span data-i18n="training.stage2">Stage 2</span><strong data-i18n="training.stage2Text">Temporal adaptation</strong></li>
+          </ol>
 
-            <div class="column has-text-centered">
-              <div class="publication-links">
-                <span class="link-block">
-                  <a href="https://arxiv.org/abs/2604.16114" target="_blank"
-                  class="external-link button is-normal is-rounded is-dark">
-                    <span class="icon">
-                      <i class="fas fa-file-pdf"></i>
-                    </span>
-                    <span>Paper</span>
-                  </a>
-                </span>
-
-                <span class="link-block">
-                  <a href="https://github.com/dengyuhai/ICTone_Project" target="_blank"
-                  class="external-link button is-normal is-rounded is-dark">
-                    <span class="icon">
-                      <i class="fab fa-github"></i>
-                    </span>
-                    <span>Code Coming Soon</span>
-                  </a>
-                </span>
-
-                <span class="link-block">
-                  <a href="#"
-                  class="external-link button is-normal is-rounded is-dark"
-                  aria-disabled="true">
-                    <span class="icon">
-                      <i class="fas fa-database"></i>
-                    </span>
-                    <span>TST100K Coming Soon</span>
-                  </a>
-                </span>
-
-                <span class="link-block">
-                  <a href="https://huggingface.co/datasets/ToneStyle/TST2K" target="_blank" rel="noopener noreferrer"
-                  class="external-link button is-normal is-rounded is-dark">
-                    <span class="icon">
-                      <i class="fas fa-database"></i>
-                    </span>
-                    <span>TST2K</span>
-                  </a>
-                </span>
-
+          <figure class="paper-figure overview-figure">
+            <a class="figure-image-link" href="static/images/report/vaexpress-figure1.png" target="_blank" rel="noopener" aria-label="Open the full-size spatial-temporal training visualization" data-i18n-aria-label="figure.overviewOpen">
+              <picture>
+                <source srcset="static/images/report/vaexpress-figure1.webp" type="image/webp">
+                <img
+                  src="static/images/report/vaexpress-figure1.png"
+                  alt="Audio-aligned facial expressions, fine-grained intensity adjustment, and emotion transition"
+                  data-i18n-alt="figure.overviewAlt"
+                  width="1664"
+                  height="544"
+                  loading="lazy"
+                >
+              </picture>
+              <span aria-hidden="true">↗</span>
+            </a>
+            <figcaption>
+              <span data-i18n="figure.overviewKicker">Spatial-temporal decoupled training visualization</span>
+              <div>
+                <h3 data-i18n="figure.overviewTitle">Clear expression response, then smooth temporal change.</h3>
+                <p data-i18n="figure.overviewText">The top row shows expressions aligned with speech. The bottom row shows that continuous VA signals can adjust intensity and drive an emotion transition. The two-stage training keeps this expressive response before adding temporal coherence.</p>
               </div>
-            </div>
+            </figcaption>
+          </figure>
+        </article>
+      </div>
+
+      <figure class="paper-figure analysis-figure">
+        <figcaption>
+          <span data-i18n="figure.analysisKicker">Why decouple training</span>
+          <div>
+            <h3 data-i18n="figure.analysisTitle">Temporal modules can suppress expression response.</h3>
+            <p data-i18n="figure.analysisText">The orange curves with temporal modules are flatter and react more slowly to changing arousal. The blue curves without them follow the control signal more closely. This motivates learning expressive mappings first, then adding temporal coherence.</p>
           </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+        </figcaption>
+        <a class="figure-image-link" href="static/images/report/temporal-module-analysis.png" target="_blank" rel="noopener" aria-label="Open the full-size temporal module analysis" data-i18n-aria-label="figure.analysisOpen">
+          <img
+            src="static/images/report/temporal-module-analysis.png"
+            alt="Analysis of spatial suppression and temporal smoothing caused by temporal modules"
+            data-i18n-alt="figure.analysisAlt"
+            width="1648"
+            height="544"
+            loading="lazy"
+          >
+          <span aria-hidden="true">↗</span>
+        </a>
+      </figure>
+    </section>
 
+    <section class="evidence" aria-label="Evaluation summary" data-i18n-aria-label="evidence.label">
+      <p data-i18n="evidence.text">The practical effect is visible in the clips above. Controlled evaluation also shows stronger expression accuracy and video quality on MEAD and RAVDESS.</p>
+      <a href="VAExpress.pdf" data-i18n="evidence.link">View the full evaluation in the technical report ↗</a>
+    </section>
 
-<!-- Teaser -->
-<section class="hero teaser">
-  <div class="container is-max-desktop">
-    <div class="hero-body">
-      <video
-        class="teaser-video"
-        autoplay
-        muted
-        loop
-        playsinline
-        controls
-        preload="metadata"
-      >
-        <source src="static/images/gif.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-      </video>
-      <img src="static/images/teaser_figure1.png" alt="ICTone showcase across diverse scenarios" loading="eager">
-      <h2 class="subtitle has-text-centered">
-        ICTone transfers photographic tone style across diverse scenes while preserving semantic structure and avoiding common cross-scene color misalignment.
-      </h2>
-    </div>
-  </div>
-</section>
-<!-- End teaser -->
+    <section class="closing">
+      <div>
+        <p class="eyebrow">VAExpress</p>
+        <h2 data-i18n-html="closing.title">One portrait. One voice.<br>A more expressive result.</h2>
+      </div>
+      <a class="button primary" href="VAExpress.pdf" data-i18n="closing.button">Open technical report ↗</a>
+    </section>
+  </main>
 
-<!-- Paper abstract -->
-<section class="section hero is-light">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Abstract</h2>
-        <div class="content has-text-justified">
-          <p>
-            Tone style transfer for photo retouching aims to adapt the stylistic tone of the reference image to a given content image. However, the lack of high-quality large-scale triplet datasets with stylized ground truth forces existing methods to rely on self-supervised or proxy objectives, which limits model capability. To mitigate this gap, we design a data construction pipeline to build <strong>TST100K</strong>, a large-scale dataset of 100,000 content-reference-stylized triplets. At the core of this pipeline, we train a tone style scorer to ensure strict stylistic consistency for each triplet. We further propose <strong>ICTone</strong>, a diffusion-based framework that performs tone transfer in an in-context manner by jointly conditioning on both images, leveraging the semantic priors of generative models for semantic-aware transfer. Reward feedback learning using the tone style scorer is incorporated to improve stylistic fidelity and visual quality. Experiments demonstrate the effectiveness of TST100K, and ICTone achieves state-of-the-art performance on both quantitative metrics and human evaluations.
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- End paper abstract -->
-
-
-<section class="section">
-  <div class="container is-max-desktop">
-    <h2 class="title is-3 has-text-centered">Main Contributions</h2>
-    <div class="columns">
-      <div class="column">
-        <div class="box">
-          <h3 class="title is-5">TST100K and TST2K</h3>
-          <p>We construct the first large-scale content-reference-stylized triplet dataset and a carefully curated 2K benchmark for precise evaluation.</p>
-        </div>
-      </div>
-      <div class="column">
-        <div class="box">
-          <h3 class="title is-5">Tone Style Scorer</h3>
-          <p>A two-stage scorer measures tone similarity, filters noisy triplets, and serves as a reward signal during model optimization.</p>
-        </div>
-      </div>
-      <div class="column">
-        <div class="box">
-          <h3 class="title is-5">ICTone</h3>
-          <p>An in-context diffusion framework that jointly reasons over content and reference images for semantically aware tone transfer.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section is-light">
-  <div class="container is-max-desktop">
-    <div class="stacked-figure-section">
-      <div class="stacked-figure-text">
-        <h2 class="title is-3">Tone Similarity Modeling</h2>
-        <div class="content has-text-justified">
-          <p>
-            The tone style scorer is trained in two stages. It first learns coarse tone representations from preset-generated image pairs using weakly supervised contrastive learning, and is then refined using 20K human ranking annotations for better perceptual alignment.
-          </p>
-          <p>
-            This scorer is central to the project: it enables scalable construction of high-quality triplets and provides a reward function that explicitly pushes ICTone toward stronger reference tone fidelity.
-          </p>
-        </div>
-      </div>
-      <div class="stacked-figure-media">
-        <img src="static/images/Discriminator_pipeline.png" alt="Overview of the TST2K benchmark" loading="lazy">
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="container is-max-desktop">
-    <div class="stacked-figure-section">
-      <div class="stacked-figure-text">
-        <h2 class="title is-3">Dataset Construction</h2>
-        <div class="content has-text-justified">
-          <p>
-            To address the lack of high-quality paired data, we build a large-scale dataset of content-reference-stylized triplets. Images are collected from high-quality public photo datasets, normalized to remove pre-existing tonal bias, and then edited with curated professional presets.
-          </p>
-          <p>
-            A dedicated tone style scorer and an aesthetic model jointly filter generated pairs, ensuring that each triplet is both tone-consistent and visually appealing. The final TST100K dataset contains 100,000 triplets, and TST2K provides a manually curated benchmark spanning portrait, food, landscape, night, and lifestyle scenes.
-          </p>
-        </div>
-      </div>
-      <div class="stacked-figure-media dataset-pipeline-block">
-        <img src="static/images/data_pipeline.png" alt="TST100K data construction pipeline" loading="lazy">
-      </div>
-    </div>
-
-    <div class="dataset-overview-block">
-      <div class="columns is-vcentered">
-        <div class="column is-half">
-          <h3 class="title is-5">TST2K Benchmark Overview</h3>
-          <div class="content has-text-justified">
-            <p>
-              <strong>TST2K</strong> is a carefully curated benchmark derived from the large-scale construction pipeline for reliable evaluation. It includes representative image categories such as portraits, food, landscapes, night scenes, and lifestyle photography, covering a broad range of semantic structures and lighting conditions.
-            </p>
-            <p>
-              This benchmark complements TST100K by providing a smaller and cleaner test bed for both quantitative comparison and qualitative visualization, helping us assess whether a method can preserve scene content while faithfully matching the reference tone.
-            </p>
-          </div>
-        </div>
-        <div class="column is-half">
-          <img src="static/images/dataset_overview2.png" alt="Overview of the TST2K benchmark" loading="lazy">
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section hero is-light">
-  <div class="container is-max-desktop">
-    <div class="columns is-vcentered">
-      <div class="column is-half">
-        <h2 class="title is-3">ICTone Framework</h2>
-        <div class="content has-text-justified">
-          <p>
-            Existing methods usually encode content and reference separately before fusion, which can weaken semantic correspondence and lead to inappropriate color transfer. ICTone instead formulates tone transfer as an <strong>in-context generation</strong> problem.
-          </p>
-          <p>
-            By concatenating the content and reference images into a shared visual context for a diffusion inpainting model, ICTone leverages the semantic priors of large generative models to produce structure-aware tone transfer. Reward feedback learning based on the tone style scorer further improves stylistic fidelity and aesthetic quality.
-          </p>
-        </div>
-      </div>
-      <div class="column is-half">
-        <img src="static/images/ModelPipeline_lq.png" alt="ICTone model pipeline" loading="lazy">
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="container is-max-desktop">
-    <h2 class="title is-3 has-text-centered">Experimental Results</h2>
-    <div class="columns">
-      <div class="column">
-        <div class="box has-text-centered">
-          <h3 class="title is-5">Quantitative</h3>
-          <p>ICTone achieves the best overall results on TST2K and strong generalization on PST50 across content preservation, color difference, deep color difference, and aesthetic quality.</p>
-        </div>
-      </div>
-      <div class="column">
-        <div class="box has-text-centered">
-          <h3 class="title is-5">Qualitative</h3>
-          <p>Compared with prior methods, ICTone better preserves natural skin tones, color hierarchy, illumination coherence, and scene semantics.</p>
-        </div>
-      </div>
-      <div class="column">
-        <div class="box has-text-centered">
-          <h3 class="title is-5">User Study</h3>
-          <p>Human evaluation ranks ICTone first, reflecting a strong balance among structural fidelity, tone consistency, and visual appeal.</p>
-        </div>
-      </div>
-    </div>
-    <div class="results-carousel-shell" aria-label="Experimental result figures">
-      <div class="results-carousel-header">
-        <p class="results-carousel-hint">Swipe on mobile or use the arrow controls to switch between qualitative figures and the quantitative/user study tables.</p>
-        <div class="results-carousel-controls">
-          <button class="results-carousel-nav" type="button" data-results-prev aria-label="Previous slide">
-            <span aria-hidden="true">&#8249;</span>
-          </button>
-          <div class="results-carousel-dots" data-results-dots></div>
-          <button class="results-carousel-nav" type="button" data-results-next aria-label="Next slide">
-            <span aria-hidden="true">&#8250;</span>
-          </button>
-        </div>
-      </div>
-      <div
-        id="experimental-results-carousel"
-        class="results-carousel"
-        data-results-carousel
-        tabindex="0"
-        aria-roledescription="carousel"
-        aria-label="Experimental Results carousel"
-      >
-        <div class="results-carousel-viewport" data-results-viewport>
-          <div class="results-carousel-track" data-results-track>
-            <article class="item" role="group" aria-roledescription="slide" aria-label="1 of 2">
-              <img src="static/images/Fig2_comp_portrait_food_building_lq.png" alt="Qualitative comparison across portrait, food, and urban scenes" loading="lazy">
-              <h3 class="title is-5 has-text-centered mt-5">Qualitative Comparison</h3>
-              <p class="subtitle has-text-centered">
-                ICTone consistently avoids semantic misalignment, such as transferring object colors onto faces, and produces outputs closer to the stylized target across portrait, food, and urban scenes.
-              </p>
-            </article>
-            <article class="item" role="group" aria-roledescription="slide" aria-label="2 of 2">
-              <img src="static/images/Quantitative_and_UserStudy_tables.png" alt="Quantitative and User Study tables for ICTone" loading="lazy">
-              <h3 class="title is-5 has-text-centered mt-5">Quantitative and User Study Tables</h3>
-              <p class="subtitle has-text-centered">
-                The quantitative benchmarks and user study both show strong performance for ICTone, highlighting better tone fidelity, preserved structure, and stronger overall preference from human evaluators.
-              </p>
-            </article>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-  <footer class="footer">
-  <div class="container">
-    <div class="columns is-centered">
-      <div class="column is-8">
-        <div class="content">          <p>
-            This page is adapted from the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a>. If this project helps your work, please cite the paper and link to this repository.
-          </p>
-
-        </div>
-      </div>
-    </div>
-  </div>
-</footer>
-
-  </body>
-  </html>
+  <footer class="site-footer">
+    <div class="brand"><img src="static/images/vaexpress-mark.svg" alt="" width="30" height="30"><span>VAExpress</span></div>
+    <p data-i18n="footer.responsible">Use responsibly: obtain consent and disclose synthetic media.</p>
+  </footer>
+</body>
+</html>
